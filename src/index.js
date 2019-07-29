@@ -4,25 +4,27 @@ import './index.css';
 import App from './App';
 // import * as serviceWorker from './serviceWorker';
 // import { withRouter as Router } from "react-router-dom";
-import { HashRouter, BrowserRouter as Router } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from './Redux/Store/Store';
+import { HashRouter, BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './Store';
 import findMyWorkoutPlan from './images/findMyWorkoutPlan.PNG';
 
-const backGroundStyle={
+const backGroundStyle = {
   // ImageBackground: url(${findMyWorkoutPlan});
-  width: "100%",
+  width: '100%',
   // height: "100%",
-  height: "1000px",
-  backgroundImage: "url(" + findMyWorkoutPlan + ")"
-}
+  height: '1000px',
+  backgroundImage: 'url(' + findMyWorkoutPlan + ')'
+};
 // ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(
-  <Provider store={store} style={backGroundStyle}> {/* for redux store updates (needs to be on root component) */}
+  <Provider store={store} style={backGroundStyle}>
+    {' '}
+    {/* for redux store updates (needs to be on root component) */}
     {/* <Router>       */}
     {/* changed for deploying on gh-pages */}
     <HashRouter>
-      <App >
+      <App>
         {/* <link
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -33,7 +35,7 @@ ReactDOM.render(
     </HashRouter>
     {/* </Router> */}
   </Provider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 // If you want app to work offline and load faster, you can change

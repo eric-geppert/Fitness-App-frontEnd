@@ -1,10 +1,10 @@
-const setValue = (goal) => {
-    return{
-        type: "SET_VALUE",
-        payload: {
-            value: goal
-        }
+const setValue = goal => {
+  return {
+    type: 'SET_VALUE',
+    payload: {
+      value: goal
     }
-  }
-  
-  export default setValue;
+  };
+};
+
+export default setValue;

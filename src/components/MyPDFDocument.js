@@ -1,7 +1,20 @@
 import React, { Component } from 'react';
 import { Document, Page } from 'react-pdf';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 
+var count = 0;
 class MyPDFDocument extends Component {
+  // const MyPDFDocument = props => {
+
+  constructor(props) {
+    super(props);
+
+    // this.state = {
+    //   isAuthenticated: false
+    // };
+  }
+
   rednerWorkout(param) {
     switch (param) {
       case '../images/workouts/ConditioningWeightLoss5V1.pdf':
@@ -34,11 +47,26 @@ class MyPDFDocument extends Component {
   }
 
   renderPage() {
+    count++;
+    console.error('iteration: ', count);
+    var pageCount = 0;
+    console.log(
+      'this.props.isAutheenticated in PDF renderPage: ',
+      this.props.isAuthenticated
+    );
     var pageElements = [];
-    const isAuthenticated = false;
-    if (isAuthenticated) var pageCount = this.props.pages;
-    else var pageCount = 2;
+    var auth = this.props.isAuthenticated;
+    console.log('auth: ', auth);
+    console.log('this.props.pages: ', this.props.pages);
+    if (auth.isAuthenticated == true) {
+      pageCount = this.props.pages;
+      console.log('true: setting pageCount to: ', pageCount);
+    } else {
+      pageCount = 2;
+      console.log('false: setting pageCount to: ', pageCount);
+    }
 
+    console.log('pages', pageCount);
     for (var i = 1; i < pageCount; i++)
       pageElements.push(
         <Page key={i} pageNumber={i} onLoadError={console.error} />
@@ -55,7 +83,16 @@ class MyPDFDocument extends Component {
   }
 }
 
-export default MyPDFDocument;
+MyPDFDocument.propTypes = {
+  isAuthenticated: propTypes.any.isRequired //what to put instead of any
+};
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.isAuthenticatedReducer
+});
+
+//need to send an action??
+export default connect(mapStateToProps)(MyPDFDocument);
 
 //if have problems with pages out of order visit link later
 //https://stackoverflow.com/questions/16480469/how-to-display-whole-pdf-not-only-one-page-with-pdf-js
